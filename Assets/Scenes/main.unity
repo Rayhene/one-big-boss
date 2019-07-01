@@ -327,9 +327,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c47c3b1c39eddde4d890a779b500d10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 4
-  stoppingDistance: 3
+  speed: 5
+  stoppingDistance: 5
   retreatDistance: 2
+  projectile: {fileID: 6959764150925539654, guid: 3204cc0ee056c604faebb4ac85170b1f,
+    type: 3}
+  startTimeBtwShots: 2
 --- !u!1 &1600586276
 GameObject:
   m_ObjectHideFlags: 0

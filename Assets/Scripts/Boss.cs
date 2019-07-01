@@ -10,9 +10,16 @@ public class Boss : MonoBehaviour
 
     private Transform player;
 
+    public GameObject projectile;
+
+    private float timeBtwShots;
+    public float startTimeBtwShots;
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
+        timeBtwShots = startTimeBtwShots;
     }
 
     
@@ -29,6 +36,15 @@ public class Boss : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
 
+        }
+
+        if(timeBtwShots <= 0)
+        {
+            Instantiate(projectile, transform.position, Quaternion.identity);
+            timeBtwShots = startTimeBtwShots;
+        }else
+        {
+            timeBtwShots -= Time.deltaTime;
         }
     }
 }
