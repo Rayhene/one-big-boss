@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
+    public int health;
+    public int damage;
+
     public float speed;
-    public float stoppingDistance;
-    public float retreatDistance;
 
     private Transform player;
 
@@ -14,6 +16,8 @@ public class Boss : MonoBehaviour
 
     private float timeBtwShots;
     public float startTimeBtwShots;
+
+    public Slider healthBar;
 
     void Start()
     {
@@ -25,20 +29,9 @@ public class Boss : MonoBehaviour
     
     void Update()
     {
-        if(Vector2.Distance(transform.position, player.position) > stoppingDistance)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        }
-        else if(Vector2.Distance(transform.position, player.position) < stoppingDistance && Vector2.Distance(transform.position, player.position) > retreatDistance)
-        {
-            transform.position = this.transform.position;
-        }else if(Vector2.Distance(transform.position, player.position) < retreatDistance)
-        {
-            transform.position = Vector2.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
 
-        }
-
-        if(timeBtwShots <= 0)
+        if (timeBtwShots <= 0)
         {
             Instantiate(projectile, transform.position, Quaternion.identity);
             timeBtwShots = startTimeBtwShots;
@@ -46,5 +39,7 @@ public class Boss : MonoBehaviour
         {
             timeBtwShots -= Time.deltaTime;
         }
+
+        healthBar.value = health;
     }
 }
