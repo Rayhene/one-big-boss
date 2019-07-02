@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8956250687793743946}
   - component: {fileID: 221988141672470501}
   - component: {fileID: 5352207439735638728}
-  - component: {fileID: -2420716081955088017}
+  - component: {fileID: -578339210401355809}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: Projectile 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: afe51a53185d8d04e9f47079ae1caf66, type: 3}
-  m_Color: {r: 0.8980392, g: 0.18039216, b: 0.18039216, a: 1}
+  m_Color: {r: 0.022774696, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifeTime: 2
---- !u!50 &-2420716081955088017
+--- !u!50 &-578339210401355809
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
