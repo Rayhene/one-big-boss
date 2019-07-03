@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Projectile : MonoBehaviour
 {
     public float speed;
-
+    public float lifeTime;
     private Transform player;
     private Vector2 target;
+    private Rigidbody2D rgd;
+    Vector2 direction;
 
     void Start()
     {
@@ -16,14 +19,30 @@ public class Projectile : MonoBehaviour
         target = new Vector2(player.position.x, player.position.y);
     }
 
+    public void Inicialization(Vector2 dir)
+    {
+        this.direction = dir;
+        rgd = GetComponent<Rigidbody2D>();
+    }
+
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
 
-        if (transform.position.x == target.x && transform.position.y == target.y)
-        {
+
+        // Bala perseguidora
+        // direction = (player.transform.position - transform.position).normalized;
+
+
+
+        rgd.velocity = direction * speed;
+
+        lifeTime -= Time.deltaTime;
+        if (lifeTime <= 0)
             DestroyProjectile();
-        }
+        //if (transform.position.x == target.x && transform.position.y == target.y)
+        //{
+        //    DestroyProjectile();
+        //}
     }
 
     void OnTriggerEnter2D(Collider2D other)
