@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public float force = 100;
-    public int health;
+    public float health;
     public int bossDamage = 10;
     public Slider healthBar;
 
@@ -15,28 +15,32 @@ public class Player : MonoBehaviour
     private Vector2 moveVelocity;
     private Rigidbody2D rb;
 
+    public GameObject Aura;
     public GameObject Arma;
     private Rigidbody2D ARb;
     private Vector2 ArmaPosInicial;
     private float TimeHolding;
     public float MaxTimeHolding = 2;
 
+    [SerializeField]
     private bool Cooldown = false;
-    private float CooldownTime = 0;
     private bool Throwed = false;
     private bool Cancel = false;
     private bool isMoving = false;
 
-
+    private float CooldownTime = 0;
+    private GameOverControl gOver;
+    
 
  
     void Start()
     {
-
+        gOver = Camera.main.GetComponent<GameOverControl>();
         rb = GetComponent<Rigidbody2D>();
         ARb = Arma.GetComponent<Rigidbody2D>();
         ARb.isKinematic = true;
         ArmaPosInicial = Arma.transform.localPosition;
+        Aura.SetActive(false);
     }
 
    
@@ -57,10 +61,23 @@ public class Player : MonoBehaviour
 
         healthBar.value = health;
 
+        if(health <= 0)
+        {
+            gOver.GameOver();
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+
+        }
+
+        if (gOver.GameOverCheck)
+        {
+            this.gameObject.GetComponent<Player>().enabled = false;
+        }
+
+
 
     }
 
-     void FixedUpdate()
+    void FixedUpdate()
     {
 
         rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
@@ -75,8 +92,11 @@ public class Player : MonoBehaviour
         //Cooldown Control
         if (Cooldown)
         {
-            if (CooldownTime < 0.5f) CooldownTime += Time.deltaTime;
+            if (CooldownTime < 0.2f) CooldownTime += Time.deltaTime;
             else Cooldown = false;
+
+            Aura.SetActive(false);
+
         }
         else CooldownTime = 0;
         //
@@ -96,7 +116,9 @@ public class Player : MonoBehaviour
         //Disparar
         if(Input.GetKeyUp(KeyCode.Mouse0) | Input.GetKeyUp(KeyCode.Mouse1))
         {
-            if(!Cancel && !Throwed && !Cooldown)
+            Aura.SetActive(false);
+
+            if (!Cancel && !Throwed && !Cooldown)
             {
                 ARb.isKinematic = false;
                 ThrowForce = TimeHolding * force;
@@ -122,6 +144,8 @@ public class Player : MonoBehaviour
         //Puxar de volta
         if (Input.GetKey(KeyCode.LeftShift) && Throwed && !Cancel && !Cooldown) // && !isMoving
         {
+            Aura.SetActive(true);
+
             if (TimeHolding < MaxTimeHolding) TimeHolding += Time.deltaTime;
             else TimeHolding = MaxTimeHolding;
 
@@ -177,6 +201,16 @@ public class Player : MonoBehaviour
 
 
         
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Inimigo")
+        {
+            health -= bossDamage * Time.deltaTime;
+           // Debug.Log(health);
+
+        }
     }
 
 }
