@@ -13,9 +13,11 @@ public class Boss : MonoBehaviour
 
     }
 
-    public int health;
+    public float health;
     public int playerDamage = 3;
     public float speed;
+    public GameObject DeadExplosion;
+
 
     private Transform player;
 
@@ -39,8 +41,13 @@ public class Boss : MonoBehaviour
 
     [SerializeField] private StateType myState;
 
+
+    private GameOverControl gOver;
+
     void Start()
     {
+        gOver = Camera.main.GetComponent<GameOverControl>();
+
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
         timeBtwShots = startTimeBtwShots;
@@ -54,7 +61,21 @@ public class Boss : MonoBehaviour
 
     void Update()
     {
-        
+
+        if (health <= 0)
+        {
+            Instantiate(DeadExplosion, transform.position, Quaternion.identity);
+            gOver.GameOver();
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            
+        }
+
+        if (gOver.GameOverCheck)
+        {
+            this.gameObject.GetComponent<Boss>().enabled = false;
+        }
+
+
         if (finiteStateMachine != null && finiteStateMachine.currentlyRunningState == null)
         {
 
@@ -122,8 +143,10 @@ public class Boss : MonoBehaviour
     {
         if (collision.tag == "Arma")
         {
-            health -= playerDamage;
-
+            if(collision.transform.parent == null)
+            health -= playerDamage * Random.Range(1, 3);
+            else
+            health -= playerDamage * Random.Range(0.5f,1.2f);
         }
 
 
