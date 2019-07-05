@@ -14,8 +14,7 @@ public class Boss : MonoBehaviour
     }
 
     public int health;
-    public int damage;
-
+    public int playerDamage = 3;
     public float speed;
 
     private Transform player;
@@ -49,11 +48,13 @@ public class Boss : MonoBehaviour
         finiteStateMachine = new FiniteStateMachine();
 
         lastShoot = -shootCooldown;
+        
     }
 
 
     void Update()
     {
+        
         if (finiteStateMachine != null && finiteStateMachine.currentlyRunningState == null)
         {
 
@@ -98,7 +99,7 @@ public class Boss : MonoBehaviour
         //    timeBtwShots -= Time.deltaTime;
         //}
 
-        //healthBar.value = health;
+        healthBar.value = health;
     }
 
     public bool Shoot(GameObject prefab, Vector3 dir)
@@ -113,6 +114,18 @@ public class Boss : MonoBehaviour
             return true;
         }
         return false;
+
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Arma")
+        {
+            health -= playerDamage;
+
+        }
+
 
     }
 

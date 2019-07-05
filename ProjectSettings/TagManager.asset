@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Arma
   - Barreira
+  - Inimigo
   layers:
   - Default
   - TransparentFX

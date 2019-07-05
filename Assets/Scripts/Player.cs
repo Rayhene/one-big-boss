@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public float speed;
     public float force = 100;
-    public int VidaMax = 100;
-    public static int Vida;
+    public int health;
+    public int bossDamage = 10;
+    public Slider healthBar;
 
 
     private Vector2 moveVelocity;
@@ -30,7 +32,7 @@ public class Player : MonoBehaviour
  
     void Start()
     {
-        Vida = VidaMax;
+
         rb = GetComponent<Rigidbody2D>();
         ARb = Arma.GetComponent<Rigidbody2D>();
         ARb.isKinematic = true;
@@ -48,11 +50,13 @@ public class Player : MonoBehaviour
         if (moveVelocity != Vector2.zero)
         {
             isMoving = true;
-            Debug.Log("Movendo");
+            
         }
         else
             isMoving = false;
-       
+
+        healthBar.value = health;
+
 
     }
 
@@ -164,12 +168,15 @@ public class Player : MonoBehaviour
             Cooldown = true;
         }
 
-        if(collision.tag == "Inimigo")
+        if (collision.tag == "Inimigo")
         {
-            Vida--;
-
+                health -= bossDamage;
+            Debug.Log(health);
 
         }
+
+
+        
     }
 
 }

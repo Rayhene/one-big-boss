@@ -5,6 +5,7 @@ using UnityEngine;
 public class Spear : MonoBehaviour
 {
     Rigidbody2D rb;
+    public int playerDamage = 3;
     
     // Start is called before the first frame update
     void Start()
@@ -28,5 +29,7 @@ public class Spear : MonoBehaviour
 
 
         }
+
+
     }
 }

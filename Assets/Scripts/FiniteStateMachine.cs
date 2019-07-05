@@ -162,7 +162,7 @@ public class ChasePlayer2 : State
 
 
         // Rotação baseada no tempo
-        // self.rotation = Quaternion.Lerp(self.rotation, Quaternion.LookRotation(dir), Time.deltaTime * spd);
+        //self.rotation = Quaternion.Lerp(self.rotation, Quaternion.LookRotation(dir), Time.deltaTime * spd);
 
     }
     public override void onStateOver()
