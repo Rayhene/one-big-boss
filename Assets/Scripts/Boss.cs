@@ -108,17 +108,7 @@ public class Boss : MonoBehaviour
 
         finiteStateMachine.ExecuteState();
 
-        //transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-
-        //if (timeBtwShots <= 0)
-        //{
-        //    Instantiate(projectile, transform.position, Quaternion.identity);
-        //    timeBtwShots = startTimeBtwShots;
-        //}
-        //else
-        //{
-        //    timeBtwShots -= Time.deltaTime;
-        //}
+     
 
         healthBar.value = health;
     }

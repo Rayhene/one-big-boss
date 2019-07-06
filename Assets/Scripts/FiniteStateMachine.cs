@@ -92,9 +92,6 @@ public class ChasePlayer : State
             stateOver = true;
 
 
-        // Rotação baseada no tempo
-        // self.rotation = Quaternion.Lerp(self.rotation, Quaternion.LookRotation(dir), Time.deltaTime * spd);
-
     }
     public override void onStateOver()
     {
@@ -159,10 +156,6 @@ public class ChasePlayer2 : State
 
         if (self.Shoot(projectile, dir))
             stateOver = true;
-
-
-        // Rotação baseada no tempo
-        //self.rotation = Quaternion.Lerp(self.rotation, Quaternion.LookRotation(dir), Time.deltaTime * spd);
 
     }
     public override void onStateOver()

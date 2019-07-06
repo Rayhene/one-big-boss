@@ -4996,6 +4996,7 @@ MonoBehaviour:
   Aura: {fileID: 211056052}
   Arma: {fileID: 607682420}
   MaxTimeHolding: 2
+  Cooldown: 0
 --- !u!50 &247519891
 Rigidbody2D:
   serializedVersion: 4
@@ -5184,7 +5185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25c546b0e01c13f4dacd8eba15f7da9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerDamage: 3
 --- !u!1 &653972551
 GameObject:
   m_ObjectHideFlags: 0
@@ -5866,7 +5866,7 @@ MonoBehaviour:
   projectile:
   - {fileID: 6959764150925539654, guid: 3204cc0ee056c604faebb4ac85170b1f, type: 3}
   - {fileID: 6959764150925539654, guid: 8ff565cb1bcf31d43a5e991f1f152e6f, type: 3}
-  idleTime: 3
+  idleTime: 1
   startTimeBtwShots: 2
   healthBar: {fileID: 1589569333}
   shootCooldown: 2
@@ -6888,6 +6888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GameOverHolder: {fileID: 677835934}
   TimeText: {fileID: 1609201113}
+  GameOverCheck: 0
 --- !u!1 &1609201111
 GameObject:
   m_ObjectHideFlags: 0
@@ -6990,7 +6991,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: -1
+  m_firstOverflowCharacterIndex: 0
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
